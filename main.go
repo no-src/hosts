@@ -1,13 +1,14 @@
 package main
 
 import (
-	"github.com/no-src/log"
 	"io/ioutil"
 	"os"
 	"regexp"
 	"runtime"
 	"sort"
 	"strings"
+
+	"github.com/no-src/log"
 )
 
 func main() {
