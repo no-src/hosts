@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
 	"os"
 	"regexp"
 	"runtime"
@@ -26,7 +25,7 @@ func printHosts() {
 		hostsFile = sysRoot + `\System32\drivers\etc\hosts`
 	}
 
-	hostsBytes, err := ioutil.ReadFile(hostsFile)
+	hostsBytes, err := os.ReadFile(hostsFile)
 	if err != nil {
 		log.Error(err, "read hosts file error")
 		return
