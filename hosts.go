@@ -1,4 +1,4 @@
-package main
+package hosts
 
 import (
 	"os"
@@ -10,15 +10,12 @@ import (
 	"github.com/no-src/log"
 )
 
-func main() {
-	printHosts()
-}
-
 func isWindows() bool {
 	return runtime.GOOS == "windows"
 }
 
-func printHosts() {
+// PrintHosts print the hosts info
+func PrintHosts() {
 	hostsFile := "/etc/hosts"
 	if isWindows() {
 		sysRoot := os.Getenv("SYSTEMROOT")
