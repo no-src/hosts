@@ -1,7 +1,7 @@
-package main
+package hosts
 
 import "testing"
 
 func TestPrintHosts(t *testing.T) {
-	printHosts()
+	PrintHosts()
 }
