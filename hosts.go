@@ -15,7 +15,7 @@ func isWindows() bool {
 }
 
 // PrintHosts print the hosts info
-func PrintHosts() {
+func PrintHosts(search ...string) {
 	hostsFile := "/etc/hosts"
 	if isWindows() {
 		sysRoot := os.Getenv("SYSTEMROOT")
@@ -67,8 +67,27 @@ func PrintHosts() {
 	log.Log("-------------------------------------------------")
 	hosts = recombine(hosts)
 	for _, item := range hosts {
-		log.Log("%s %s", item.IP, strings.Join(item.HostNameList, " "))
+		var source []string
+		source = append(source, item.IP)
+		source = append(source, item.HostNameList...)
+		if find(source, search...) {
+			log.Log("%s %s", item.IP, strings.Join(item.HostNameList, " "))
+		}
 	}
+}
+
+func find(source []string, search ...string) bool {
+	if len(search) == 0 {
+		return true
+	}
+	for _, searchItem := range search {
+		for _, name := range source {
+			if strings.Contains(strings.ToLower(name), strings.ToLower(searchItem)) {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 // recombine try to recombine hosts,group by ip and distinct,order by ip
